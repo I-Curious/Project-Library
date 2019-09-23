@@ -1,0 +1,145 @@
+{% load static %}
+
+<!-- This file contains the base template which has the header footer and other parameters that are common to all the sites -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <!-- js -->
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <!-- //js -->
+    <link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" property="" />
+
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" />
+    <!-- //font-awesome icons -->
+    <link href="//fonts.googleapis.com/css?family=Alegreya:400,400i,700,700i,900,900i&subset=latin-ext" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    
+    <!-- This is used to check if the content has been passed with the title if not then it will use the default one -->
+    {% if title %}
+      <title>{{ title }}</title>
+    {% else %}
+      <title>Project Library</title>
+    {% endif %}
+    <!-- End of title code -->
+
+
+  </head>
+  <body>
+    <div class="header-w3l">
+      <div class="container">
+        <nav class="navbar navbar-default">
+          <div class="navbar-header navbar-left">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <div class="wthree_logo">
+              <h1><a class="navbar-brand" href="{% url 'index-home' %}">Project Library</a></h1>
+            </div>
+          </div>
+
+          <!-- Navigation -->
+          <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <nav>
+              <ul class="nav navbar-nav link-effect-5" id="link-effect-5">
+                <li><a href="{% url 'index-home' %}" data-hover="Home">Home</a></li>
+                <li><a href="{% url 'about-home' %}" data-hover="About">About</a></li>
+                <li><a href="{% url 'mentor-home' %}" data-hover="Mentors">Mentors</a></li>
+                <li><a href="{% url 'mailus-home' %}" data-hover="Mail Us">Mail Us</a></li>
+                <li><a href="{% url 'projects-home' %}" data-hover="Projects">Projects</a></li>
+
+
+                <!-- This is used as if user is authenticated then it should have logout button else login button and register button -->
+                  {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}" data-hover="Logout">Logout</a></li>
+                  {% else %}
+                    <li><a href="{% url 'login' %}" data-hover="Login">Login</a></li>
+                    <li><a href="{% url 'register' %}" data-hover="Register">Register</a></li>
+                  {% endif %}
+                <!-- End of user authentication code -->
+                
+              </ul>
+              <div class="w3_social_icons">
+                <div class="cd-main-header">
+                  <a class="cd-search-trigger" href="#cd-search"> <span></span></a>
+                </div>
+                <div id="cd-search" class="cd-search">
+                  <form action="" method="get">
+                    <input name="Search" type="search" placeholder="Search...">
+                  </form>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </nav>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    {% if message in messages %}
+      <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endif %}
+
+    <!-- Block content is used to display individual page data and will be used seperately by every page -->
+    {% block content %}
+    {% endblock %}
+    <!-- End of block content -->
+
+    <!-- footer -->
+    	<div class="footer">
+    		<div class="container">
+    			<div class="col-md-4 w3_footer_grid">
+    				<h3>About Us</h3>
+    				<p>
+              Our Aim is to provide a platform where all information about the projects done by the department from
+              both UG and PG courses would be available along with all the details of the mentor and various memebers.
+            </p>
+    			</div>
+    			<div class="col-md-3 w3_footer_grid">
+    				<h3>Navigation</h3>
+    				<ul>
+    					<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'index-home' %}">Home</a></li>
+    					<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'about-home' %}">About</a></li>
+    					<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'mentor-home' %}">Mentors</a></li>
+    					<li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'mailus-home' %}">Mail Us</a></li>
+              <li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'projects-home' %}">Projects</a></li>
+              {% if user.is_authenticated %}
+                <li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'logout' %}">Logout</a></li>
+              {% else %}
+                <li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'login' %}">Login</a></li>
+                <li><i class="fa fa-long-arrow-right" aria-hidden="true"></i><a href="{% url 'register' %}">Register</a></li>
+              {% endif %}
+    				</ul>
+    			</div>
+    			<div class="col-md-5 w3_footer_grid">
+    				<h3>Newsletter</h3>
+    				<form action="#" method="post">
+    					<input type="email" name="email" placeholder="Your email..." required="">
+    					<input type="submit" value=" ">
+    				</form>
+    				</div>
+    			<div class="clearfix"> </div>
+    			<div class="w3layouts_footer_grid">
+    				<div class="clearfix"> </div>
+    			</div>
+          <div class="copyright_content d-flex flex-row align-items-center">
+            <div>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | K.J Somaiya College Of Engineering, Vidyavihar </div>
+        </div>
+    		</div>
+    	</div>
+    <!-- //footer -->
+    <!-- for bootstrap working -->
+    	<script src="{% static 'js/bootstrap.js' %}"></script>
+    <!-- //for bootstrap working -->
+  </body>
+</html>

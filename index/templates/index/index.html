@@ -1,0 +1,51 @@
+{% extends "index/base.html" %}  <!--Always should be the first line of code if it is not the base file-->
+{% load static %}
+{% block content %}
+  <!-- banner -->
+    <div class="banner">
+      <div class="container">
+        <section class="slider">
+          <div class="flexslider">
+            <ul class="slides">
+              <li>
+                <div class="banner_info">
+                  <h3>Project Library</h3>
+                  <p>Find the most intuitive projects of the department.</p>
+                </div>
+              </li>
+              <li>
+                <div class="banner_info">
+                  <h3>Mentors</h3>
+                  <p>The most supportive mentors.</p>
+                </div>
+              </li>
+              <li>
+                <div class="banner_info">
+                  <h3>Projects</h3>
+                  <p>That are never seen before.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <!-- flexSlider -->
+          <script defer src="{% static 'js/jquery.flexslider.js' %}"></script>
+          <script type="text/javascript">
+            $(window).load(function(){
+              $('.flexslider').flexslider({
+              animation: "slide",
+              start: function(slider){
+                $('body').removeClass('loading');
+              }
+              });
+            });
+          </script>
+        <!-- //flexSlider -->
+      </div>
+    </div>
+  <!-- //banner -->
+  <!-- tabs -->
+  
+  </div>
+  <!-- //tabs -->
+{% endblock content %}

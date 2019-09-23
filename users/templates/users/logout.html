@@ -1,0 +1,9 @@
+{% extends "index/base.html" %}
+{% load static %}
+{% block content %}
+  <div class="banner1"></div>
+  <h2>You have been Logged Out Sucessfully</h2>
+    <div class="border-top pt-3">
+      <small class="text-muted"><a href="{% url 'login' %}" class="ml-2">Login In Again</a></small>
+    </div>
+{% endblock content %}

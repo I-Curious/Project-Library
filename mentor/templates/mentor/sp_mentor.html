@@ -1,0 +1,67 @@
+{% extends "index/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<head>
+<style>
+.card1 {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 250px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title1 {
+  color: grey;
+  font-size: 18px;
+}
+
+button{
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+
+</style>
+</head>
+
+
+{% for mentor in mentors%}
+  {% if mentor.name == name %}   
+      <div class="container">  
+        <div class="col-sm-6 col-md-6 col-lg-6">  
+          
+<div class="card1">
+  <img src="{% static mentor.image_link }} %}" style="width:75% ; height:250px">
+  <h3>{{mentor.name}}</h3>
+  <p class="title1">{{mentor.email}}</p>
+  <p>Computer Department</p>
+ <p>Area of interest</p>
+</div><br>
+
+        </div>
+        <h2>Projects Under {{name}}</h2><br>  
+        <div class="col-sm-6 col-md-6 col-lg-6">  
+          <ul>
+            {% for project in projects %}
+              {% if project.mentor == mentor.email %}   
+                  <li><h4>{{project.title}}</h4><br></li>  
+              {% endif %}   
+            {% endfor %}  
+          </ul>
+            </div>  
+           </div> 
+  {% endif %} 
+{% endfor %}
+</center>
+{% endblock content %}
